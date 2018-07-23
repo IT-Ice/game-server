@@ -1,0 +1,22 @@
+{
+  "name": "game-api",
+  "version": "1.0.0",
+  "description": "游戏server端",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://118.31.60.169/root/game.git"
+  },
+  "author": "xiaobing<xiaobing0213@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "jsonwebtoken": "^8.3.0",
+    "mysql": "^2.16.0"
+  }
+}
