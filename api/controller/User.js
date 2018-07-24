@@ -12,7 +12,7 @@ function login(req, res, next) {
         let username = req.body.userName;
         let password = req.body.password;
         UserModel.login({username, password}, result => {
-            res.send(result)
+            res.josn(result);
         });
     } catch (error) {
         console.log(error);
@@ -29,7 +29,7 @@ function login(req, res, next) {
 function getUserList(req, res, next) {
     try {
         UserModel.getUserList(result => {
-            res.send(result)
+            res.json(result);
         });
     } catch (error) {
         console.log(error);

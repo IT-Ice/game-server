@@ -2,7 +2,6 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const config = require('./config');
-const whiteList = require('./lib/whiteList');
 const checkToken = require('./lib/checkToken');
 const UserRouter = require('./router/UserRouter');
 const RoleRouter = require('./router/RoleRouter');
