@@ -1,4 +1,5 @@
 const UserModel = require('../model/UserModel');
+const sha1 = require('sha1');
 
 /**
  * [auth 验证用户信息]
@@ -46,10 +47,18 @@ function getUserList(req, res, next) {
  */
 function auth(req, res, next) {
     try {
-        res.json({
-            code: 0,
-            message: '授权成功'
-        })
+        let wx = req.query;
+        let token = 'playgame';
+        let timestamp = wx.timestamp;
+        let nonce = wx.nonce;
+        let list = [token, timestamp, nonce].sort();
+        let str = list.join('');
+        let result = sha1(str);
+        if (result === wx.signature) {
+            res.send(wx.echostr);
+        } else {
+            res.send(false);
+        }
     } catch (error) {
         console.log(error);
     }
