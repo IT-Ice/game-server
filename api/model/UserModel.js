@@ -1,6 +1,6 @@
 const BaseModel = require('./BaseModel');
 const UserService = require('../service/UserService');
-
+const output = require('../../lib/output');
 class UserModel extends BaseModel {
     constructor() {
         super();
@@ -36,7 +36,7 @@ class UserModel extends BaseModel {
             if (err) {
                 console.log(err);
             }
-            callback && callback(result)
+            callback && callback(output.returnValue(0, 'success', result));
         });
     }
 }
