@@ -1,9 +1,9 @@
 {
-    "port": 8080,
+    "port": 8081,
     "superSecret": "www.play.store",
     "db": {
         "user": "root",
-        "password": "Xb@890213",
+        "password": "xb890213",
         "host": "127.0.0.1",
         "port": 3306,
         "database": "game"
