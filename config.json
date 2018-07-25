@@ -3,7 +3,7 @@
     "superSecret": "www.play.store",
     "db": {
         "user": "root",
-        "password": "xb890213",
+        "password": "Xb@890213",
         "host": "127.0.0.1",
         "port": 3306,
         "database": "game"
