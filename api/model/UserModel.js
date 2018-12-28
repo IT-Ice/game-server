@@ -1,25 +1,19 @@
 const BaseModel = require('./BaseModel');
-const UserService = require('../service/UserService');
 const output = require('../../lib/output');
 class UserModel extends BaseModel {
     constructor() {
         super();
     }
 
-    login(user, callback) {
+    async login(username) {
         let sql =  `SELECT 
                         user_id, user_name, nickname, password, telephone, gender, age
                     FROM 
                         user 
                     WHERE 
-                        user_name = '${user.username}'`;
-        this.query(sql, {}, (err, result, fileds) => {
-            if (err) {
-                console.log(err);
-            }
-            result = UserService.login(user, result);
-            callback && callback(result)
-        });
+                        user_name = ?`;
+        let result = await this.query(sql, [username]);
+        return result;
     }
 
     /**
@@ -27,17 +21,13 @@ class UserModel extends BaseModel {
      * @param {Number} id 
      * @param {Function} callback 
      */
-    getUserList(callback) {
+    async getUserList() {
         let sql =  `SELECT 
                         user_id, user_name, nickname, password, telephone, gender, age
                     FROM 
                         user`;
-        this.query(sql,{},(err, result, fileds) => {
-            if (err) {
-                console.log(err);
-            }
-            callback && callback(output.returnValue(0, 'success', result));
-        });
+        let result = await this.query(sql);
+        return output.returnValue(0, 'success', result);
     }
 }
 

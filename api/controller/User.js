@@ -1,4 +1,5 @@
 const UserModel = require('../model/UserModel');
+const UserService = require('../service/UserService');
 const sha1 = require('sha1');
 
 /**
@@ -8,13 +9,13 @@ const sha1 = require('sha1');
  * @param {*} res 
  * @param {*} next 
  */
-function login(req, res, next) {
+async function login(req, res, next) {
     try {
         let username = req.body.userName;
         let password = req.body.password;
-        UserModel.login({username, password}, result => {
-            res.send(result);
-        });
+        let result = await UserModel.login(username);
+        let userInfo = UserService.login({username, password}, result);
+        res.send(userInfo);
     } catch (error) {
         console.log(error);
     }
@@ -27,11 +28,10 @@ function login(req, res, next) {
  * @param {*} res 
  * @param {*} next 
  */
-function getUserList(req, res, next) {
+async function getUserList(req, res, next) {
     try {
-        UserModel.getUserList(result => {
-            res.send(result);
-        });
+        let result = await UserModel.getUserList();
+        res.send(result);
     } catch (error) {
         console.log(error);
     }

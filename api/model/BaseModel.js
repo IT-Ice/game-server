@@ -31,18 +31,16 @@ class BaseModel {
      * @param {Object} options 
      * @param {Function} callback 
      */
-    query(sql, options, callback) {
-        this.pool.getConnection((err, conn) => {
-            if(err) {
-                callback && callback(err, null, null);
-            }else{
-                conn.query(sql, options, (err, result, fields) => {
-                    //释放连接  
+    query(sql, value = []) {
+        return new Promise((resolev, reject) => {
+            this.pool.getConnection((err, conn) => {
+                if (err) return reject(err);
+                conn.query(sql, value, (err, result, fields) => {
+                    if (err) reject(err)
+                    else resolev(result)
                     conn.release();
-                    //事件驱动回调  
-                    callback && callback(err,result,fields);
                 });
-            }
+            })
         })
     }
 }
