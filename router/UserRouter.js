@@ -6,6 +6,4 @@ router.get('/getUserList', User.getUserList);
 
 router.post('/login', User.login);
 
-router.get('/auth', User.auth);
-
 module.exports = router;

@@ -6,6 +6,10 @@
         "password": "xb890213",
         "host": "127.0.0.1",
         "port": 3306,
-        "database": "game"
-    }
+        "database": "histore"
+    },
+    "appid": "wx249ae389f200d2bb",
+    "appsecret": "ed2b5193c1d13f839a1383d9db8e8fbe",
+    "private": "-----BEGIN RSA PRIVATE KEY-----MIGpAgEAAiEArqmUQ1hF45jqSwKE7JvO1ty1bdYJsWkByab4NOi0rGMCAwEAAQIgMST12p0TzR5Rjhl/XTPZ1pJEnUxN4L853IiW0WIgqsECEQD6L7BZTF+uuFsSLzwy6dxnAhEAsric7t48HFG1oJ9LqTaypQIQOhkm96W/toBDTdbAQQaD0wIQPMesF1BdAQSI0GdcQ9/mQQIQB5YYChTgvaaMJbagisYZig==-----END RSA PRIVATE KEY-----",
+    "public": "-----BEGIN RSA PUBLIC KEY-----MCgCIQCuqZRDWEXjmOpLAoTsm87W3LVt1gmxaQHJpvg06LSsYwIDAQAB-----END RSA PUBLIC KEY-----"
 }

@@ -1,18 +1,44 @@
 const BaseModel = require('./BaseModel');
-const output = require('../../lib/output');
 class UserModel extends BaseModel {
     constructor() {
         super();
     }
 
-    async login(username) {
-        let sql =  `SELECT 
-                        user_id, user_name, nickname, password, telephone, gender, age
+    /**
+     * [login 用户登录]
+     * @param {string} uid 
+     */
+    async login(uid) {
+        let sql = `SELECT 
+                        user_id as userId, nick_name as nickName, gender, avatar as avatarUrl
                     FROM 
                         user 
                     WHERE 
-                        user_name = ?`;
-        let result = await this.query(sql, [username]);
+                    user_id = ?`;
+        let result = await this.query(sql, [uid]);
+        return result;
+    }
+
+    /**
+     * [register 登记用户信息]
+     * @param {obj} userInfo 
+     */
+    async register(userInfo) {
+        let sql = `INSERT INTO USER(
+            user_id ,
+            open_id ,
+            union_id ,
+            nick_name ,
+            avatar ,
+            gender ,
+            city ,
+            province ,
+            country
+        )
+        VALUES
+            (? , ? , ? , ? , ? , ? , ? , ? , ?)`;
+        const {openId, unionId, nickName, avatarUrl, gender, city, province, country} = userInfo;
+        let result = await this.query(sql, [openId, openId, unionId, nickName, avatarUrl, gender, city, province, country]);
         return result;
     }
 
@@ -22,12 +48,12 @@ class UserModel extends BaseModel {
      * @param {Function} callback 
      */
     async getUserList() {
-        let sql =  `SELECT 
-                        user_id, user_name, nickname, password, telephone, gender, age
+        let sql = `SELECT 
+                        user_id as userId, nick_name as nickName, gender, avatar as avatarUrl
                     FROM 
                         user`;
         let result = await this.query(sql);
-        return output.returnValue(0, 'success', result);
+        return result;
     }
 }
 

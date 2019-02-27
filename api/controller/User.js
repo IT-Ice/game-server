@@ -1,6 +1,6 @@
 const UserModel = require('../model/UserModel');
 const UserService = require('../service/UserService');
-const sha1 = require('sha1');
+const output = require('../../lib/output');
 
 /**
  * [auth 验证用户信息]
@@ -11,11 +11,30 @@ const sha1 = require('sha1');
  */
 async function login(req, res, next) {
     try {
-        let username = req.body.userName;
-        let password = req.body.password;
-        let result = await UserModel.login(username);
-        let userInfo = UserService.login({username, password}, result);
-        res.send(userInfo);
+        let code = req.body.code;
+        let encryptedData = req.body.str.encryptedData;
+        let iv = req.body.str.iv;
+        let wxUserInfo = await UserService.login(code, encryptedData, iv);
+        let userId = wxUserInfo.openId;
+        let token =  wxUserInfo.token;
+        let result = await UserModel.login(userId);
+        let userInfo = null;
+        if (result.length === 0) {
+            let dbmsg = await UserModel.register(wxUserInfo);
+            if (dbmsg.warningCount === 0) {
+                userInfo = {
+                    userId: userId,
+                    nickName: wxUserInfo.nickName,
+                    avatarUrl: wxUserInfo.avatarUrl,
+                    gender: wxUserInfo.gender,
+                    token: token
+                };
+            }
+        }else {
+            result[0].token = token;
+            userInfo = result[0];
+        }
+        res.send(output.returnValue(0, 'success', userInfo));
     } catch (error) {
         console.log(error);
     }
@@ -37,35 +56,7 @@ async function getUserList(req, res, next) {
     }
 }
 
-
-/**
- * [auth 验证用户信息]
- * @type {Controller} 
- * @param {*} req 
- * @param {*} res 
- * @param {*} next 
- */
-function auth(req, res, next) {
-    try {
-        let wx = req.query;
-        let token = 'playgame';
-        let timestamp = wx.timestamp;
-        let nonce = wx.nonce;
-        let list = [token, timestamp, nonce].sort();
-        let str = list.join('');
-        let result = sha1(str);
-        if (result === wx.signature) {
-            res.send(wx.echostr);
-        } else {
-            res.send(false);
-        }
-    } catch (error) {
-        console.log(error);
-    }
-}
-
 module.exports = {
     getUserList,
-    login,
-    auth
+    login
 }
