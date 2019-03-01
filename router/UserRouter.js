@@ -4,6 +4,6 @@ const User = require('../api/controller/User');
 
 router.get('/getUserList', User.getUserList);
 
-router.post('/login', User.login);
+router.post('/user/login', User.login);
 
 module.exports = router;

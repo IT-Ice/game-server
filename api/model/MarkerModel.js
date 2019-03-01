@@ -55,6 +55,34 @@ class MarkerModel extends BaseModel {
         let result = await this.query(sql, [city]);
         return result;
     }
+
+    async getDetailByMid(mid) {
+        let sql = `SELECT
+                a.name,
+                a.avatar,
+                a.start_hours,
+                a.end_hours,
+                a.address,
+                a.detail_address,
+                a.latitude,
+                a.longitude,
+                a.banner_id,
+                a.large_num,
+                a.middle_num,
+                a.large_price,
+                a.middle_price,
+                a.large_current,
+                a.middle_current,
+                b.pic1,
+                b.pic2,
+                b.pic3
+            FROM
+                marker a left join banner b on a.banner_id = b.id
+            WHERE
+                merchant_id = ?`;
+        let result = await this.query(sql, [mid]);
+        return result;
+    }
 }
 
 module.exports = new MarkerModel();

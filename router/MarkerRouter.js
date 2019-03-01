@@ -2,8 +2,10 @@ const express = require('express');
 const router = express.Router();
 const Marker = require('../api/controller/Marker');
 
-router.get('/getMarkers', Marker.getMarkerByRange);
+router.get('/marker/all', Marker.getMarkerByRange);
 
-router.get('/getHots', Marker.getHots);
+router.get('/marker/hot', Marker.getHots);
+
+router.get('/marker/detail', Marker.getDetailByMid);
 
 module.exports = router;

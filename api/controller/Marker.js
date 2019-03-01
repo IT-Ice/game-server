@@ -37,7 +37,23 @@ async function getHots (req, res, next) {
     }
 }
 
-module.exports = {
-    getMarkerByRange,
-    getHots
+/**
+ * [getDetailByMid 根据商户id获取商户详情]
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} next 
+ */
+async function getDetailByMid (req, res, next) {
+    try {
+        let mid = req.query.mid;
+        let detail = await MarkerModel.getDetailByMid(mid);
+        let result = MarkerService.detail(detail);
+        res.send(output.returnValue(0, 'success', {detail: result}));
+    } catch (error) {
+        console.log(error)
+    }
 }
+
+module.exports = {
+    getMarkerByRange, getHots, getDetailByMid
+} 
