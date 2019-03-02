@@ -1,6 +1,6 @@
 const MarkerModel = require('../model/MarkerModel');
 const MarkerService = require('../service/MarkerService');
-const output = require('../../lib/output');
+const output = require('../../common/output');
 
 /**
  * [getMarkerByRange 查询服务点]

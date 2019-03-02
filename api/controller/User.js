@@ -1,6 +1,6 @@
 const UserModel = require('../model/UserModel');
 const UserService = require('../service/UserService');
-const output = require('../../lib/output');
+const output = require('../../common/output');
 
 /**
  * [auth 验证用户信息]

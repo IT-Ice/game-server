@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const config = require('./config');
-const Token = require('./lib/Token');
+const Token = require('./common/Token');
 const UserRouter = require('./router/UserRouter');
 const MarkerRouter = require('./router/MarkerRouter');
 // 给app配置bodyParser中间件

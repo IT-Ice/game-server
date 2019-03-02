@@ -1,12 +1,18 @@
 {
     "port": 8000,
     "superSecret": "www.play.store",
+    "openRedis": false,
     "db": {
         "user": "root",
         "password": "xb890213",
         "host": "127.0.0.1",
         "port": 3306,
         "database": "histore"
+    },
+    "redis": {
+        "host": "127.0.0.1",
+        "port": 6379,
+        "password": "wana89m87"
     },
     "appid": "wx249ae389f200d2bb",
     "appsecret": "ed2b5193c1d13f839a1383d9db8e8fbe"

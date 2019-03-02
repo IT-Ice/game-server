@@ -1,7 +1,7 @@
 const config = require('../../config');
-const http = require('../../lib/http');
+const http = require('../../common/http');
 const WXBizDataCrypt = require('../../lib/WXBizDataCrypt');
-const Token = require('../../lib/token');
+const Token = require('../../common/token');
 
 /**
  * [auth 验证用户身份信息并生产token]

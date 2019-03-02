@@ -1,6 +1,6 @@
 const NodeRSA = require('node-rsa');
 const fs = require('fs');
-const output = require('../lib/output');
+const output = require('./output');
 const whiteList = require('./whiteList');
 
 /**
