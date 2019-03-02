@@ -25,6 +25,10 @@ class MarkerModel {
         return result;
     }
 
+    /**
+     * [getDetailByMid 根据商户id查询商户详情]
+     * @param {String} mid 
+     */
     async getDetailByMid(mid) {
         let sql = mapping.getDetailByMid;
         let result = await db.query(sql, [mid]);
