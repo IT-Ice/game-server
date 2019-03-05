@@ -1,5 +1,6 @@
 const NodeRSA = require('node-rsa');
 const fs = require('fs');
+const path = require('path');
 const output = require('./output');
 const whiteList = require('./whiteList');
 
@@ -15,7 +16,7 @@ function generator() {
     })
     var privatePem = key.exportKey('pkcs1-private-pem')
     var publicPem = key.exportKey('pkcs1-public-pem')
-    fs.writeFile('./pem/public.pem', publicPem, (err) => {
+    fs.writeFile(path.join(__dirname, '../pem/public.pem'), publicPem, (err) => {
         if (err) throw err
         console.log('公钥已保存！')
     })
@@ -32,7 +33,7 @@ function generator() {
  */
 function encrypt(uid = '') {
     try {
-        let data = fs.readFileSync('./pem/private.pem');
+        let data = fs.readFileSync(path.join(__dirname, '../pem/private.pem'));
         let key = new NodeRSA(data);
         let token = key.encryptPrivate(uid, 'base64');
         return token;
@@ -47,7 +48,7 @@ function encrypt(uid = '') {
  */
 function decrypt(token = '') {
     try {
-        let data = fs.readFileSync('./pem/public.pem');
+        let data = fs.readFileSync(path.join(__dirname, '../pem/public.pem'));
         let key = new NodeRSA(data);
         let uid = key.decryptPublic( token, 'utf8');
         return {code: 0, msg: 'success', data:{uid: uid}};
