@@ -74,6 +74,7 @@ function check(req, res, next) {
         if (token) {
             const result = decrypt(token);
             if (result.code === 0) {
+                req.uid = result.data.uid;
                 next();
             } else {
                 return res.json(output.returnValue(-10002, '无效的token'));

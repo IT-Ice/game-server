@@ -4,5 +4,5 @@ module.exports = {
     getDetailByMid: `SELECT a. name , a.avatar , a.start_hours , a.end_hours , a.address , a.detail_address , a.latitude , a.longitude , a.banner_id , a.large_num , a.middle_num , a.large_price , a.middle_price , a.large_current , a.middle_current , b.pic1 , b.pic2 , b.pic3 FROM marker a left join banner b on a.banner_id = b.id WHERE merchant_id = ?`,
     login: `SELECT user_id as userId , nick_name as nickName , gender , avatar as avatarUrl FROM user WHERE user_id = ?`,
     register: `INSERT INTO USER( user_id , open_id , union_id , nick_name , avatar , gender , city , province , country) VALUES(? , ? , ? , ? , ? , ? , ? , ? , ?)`,
-    
+    getOrderByUserId: `SELECT a.id, a.order_num , a.date , a.order_price , a.status , a.large_num , a.middle_num , a.order_date , b.name , b.avatar , b.address , b.latitude , b.longitude , b.phone FROM orders a LEFT JOIN marker b ON a.merchant_id = b.merchant_id WHERE a.user_id = ? order by a.id DESC`,
 }
